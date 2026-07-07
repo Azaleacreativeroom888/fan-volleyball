@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>about | 紅炎バレー部</title>
+<meta name="description" content="紅炎バレー部を運営するAzalea72の紹介ページ。プロフィール、関連サイト、お問い合わせフォーム。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red-primary:#e2001a;
+    --red-deep:#8c0014;
+    --red-bright:#ff4433;
+    --cream:#fff8f3;
+    --cream-dim:#fbeee6;
+    --charcoal:#241715;
+    --charcoal-soft:#4a3733;
+    --gold:#ffc700;
+    --line:rgba(36,23,21,0.1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--charcoal-soft);
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    line-height:1.85;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== Nav (共通) ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(255,248,243,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-family:'Rampart One', sans-serif; font-size:1.15rem; color:var(--red-primary); letter-spacing:0.02em;}
+  .logo span{color:var(--charcoal);}
+  nav ul{list-style:none;display:flex;gap:clamp(14px,3vw,34px);}
+  nav a{font-weight:700; font-size:0.92rem; position:relative; padding:4px 2px;}
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:3px;
+    background:var(--red-primary); transition:width .25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{width:100%;}
+  nav a.current{color:var(--red-primary);}
+  .menu-btn{display:none;}
+
+  @media (max-width:720px){
+    nav ul{
+      position:fixed; top:64px; right:-100%; height:calc(100vh - 64px);
+      width:min(280px,80vw); background:var(--cream);
+      flex-direction:column; padding:32px 28px; gap:26px;
+      transition:right .3s ease; box-shadow:-6px 0 24px rgba(0,0,0,0.08);
+    }
+    nav ul.open{right:0;}
+    .menu-btn{
+      display:flex; flex-direction:column; gap:5px; background:none;border:none;
+      cursor:pointer; padding:8px;
+    }
+    .menu-btn span{width:24px;height:3px;background:var(--red-primary);border-radius:2px;}
+  }
+
+  /* ===== Page head ===== */
+  .page-head{padding:150px 6vw 20px; text-align:center;}
+  .page-head .kicker{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.28em;
+    color:var(--red-primary); display:block; margin-bottom:12px;
+  }
+  .page-head h1{
+    font-family:'Rampart One', sans-serif;
+    font-size:clamp(1.8rem,4.5vw,2.8rem);
+    color:var(--charcoal);
+  }
+
+  main{max-width:760px; margin:0 auto; padding:0 6vw 100px;}
+
+  section{padding:52px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+
+  .section-label{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.24em;
+    color:var(--red-primary); display:block; margin-bottom:20px;
+  }
+
+  /* ===== 紹介文 ===== */
+  .profile{
+    display:flex; gap:26px; align-items:flex-start;
+  }
+  .avatar{
+    flex-shrink:0;
+    width:88px;height:88px;border-radius:50%;
+    background:conic-gradient(from 200deg, var(--red-primary), var(--gold), var(--red-deep));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Rampart One',sans-serif;color:#fff;font-size:1.3rem;
+    box-shadow:0 10px 22px rgba(140,0,20,0.25);
+  }
+  .profile-body h2{
+    font-family:'Rampart One', sans-serif;
+    font-size:1.4rem; color:var(--charcoal); margin-bottom:12px;
+  }
+  .profile-body p{font-size:0.98rem;}
+  .profile-body p + p{margin-top:14px;}
+
+  @media (max-width:560px){
+    .profile{flex-direction:column; align-items:center; text-align:center;}
+  }
+
+  /* ===== ウェブサイト（リンク） ===== */
+  .link-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px;
+  }
+  .link-card{
+    display:flex; align-items:center; gap:14px;
+    background:var(--cream-dim);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px 16px;
+    position:relative;
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .link-card::before{
+    content:""; position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:var(--red-primary); border-radius:12px 0 0 12px;
+  }
+  .link-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 22px rgba(140,0,20,0.12);
+    border-color:rgba(226,0,26,0.3);
+  }
+  .link-icon{
+    width:42px;height:42px; flex-shrink:0; border-radius:10px;
+    background:rgba(226,0,26,0.08);
+    display:flex;align-items:center;justify-content:center; font-size:1.3rem;
+  }
+  .link-text{min-width:0;}
+  .link-name{display:block; font-weight:700; font-size:0.94rem; color:var(--charcoal);}
+  .link-desc{display:block; font-size:0.78rem; color:var(--charcoal-soft); opacity:0.85; margin-top:2px;}
+
+  /* ===== メールフォーム ===== */
+  .form-intro{font-size:0.95rem; margin-bottom:22px;}
+  form{max-width:100%; display:flex; flex-direction:column; gap:16px;}
+  .form-group{display:flex; flex-direction:column; gap:6px;}
+  label{font-size:0.8rem; font-weight:700; letter-spacing:0.04em; color:var(--charcoal-soft);}
+  .required{color:var(--red-primary); font-style:normal;}
+  input, textarea{
+    width:100%; padding:12px 14px; border-radius:8px;
+    border:1px solid var(--line); background:var(--cream);
+    color:var(--charcoal); font-family:inherit; font-size:0.95rem;
+    outline:none; transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  input::placeholder, textarea::placeholder{color:#b3a49f;}
+  input:focus, textarea:focus{
+    border-color:var(--red-primary);
+    box-shadow:0 0 0 3px rgba(226,0,26,0.12);
+  }
+  textarea{min-height:130px; resize:vertical;}
+  .field-error{font-size:0.78rem; color:var(--red-deep); min-height:1em;}
+
+  button[type=submit]{
+    align-self:flex-start;
+    margin-top:4px; padding:13px 30px; border:none; border-radius:999px;
+    background:var(--red-primary); color:#fff; font-weight:700; font-size:0.96rem;
+    cursor:pointer; transition:background .2s ease, transform .2s ease;
+  }
+  button[type=submit]:hover{background:var(--red-bright); transform:translateY(-2px);}
+  button[type=submit]:disabled{opacity:0.5; cursor:not-allowed; transform:none;}
+
+  .form-success{
+    background:rgba(226,0,26,0.06); border:1px solid rgba(226,0,26,0.25);
+    border-radius:10px; padding:16px 18px; text-align:center;
+    color:var(--red-deep); font-size:0.94rem; margin-bottom:18px;
+  }
+  .form-success .icon{display:block; font-size:1.2rem; margin-bottom:6px; color:var(--red-primary);}
+  .form-error-global{
+    background:rgba(140,0,20,0.08); border:1px solid rgba(140,0,20,0.3);
+    border-radius:10px; padding:12px 16px; color:var(--red-deep); font-size:0.88rem; margin-bottom:16px;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    padding:38px 6vw 44px; text-align:center; font-size:0.78rem; color:var(--charcoal-soft);
+    border-top:1px solid var(--line);
+  }
+  footer .ai-notice{max-width:640px; margin:0 auto 10px; opacity:0.75; line-height:1.6;}
+  footer .credit{opacity:0.6;}
+
+  ::selection{background:var(--red-primary); color:#fff;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">紅炎<span>バレー部</span></div>
+  <button class="menu-btn" aria-label="メニューを開く" aria-expanded="false" id="menuBtn">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="blog.html">観戦日記</a></li>
+      <li><a href="gallery.html">ギャラリー</a></li>
+      <li><a href="about.html" class="current">about</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-head">
+  <span class="kicker">ABOUT</span>
+  <h1>about</h1>
+</div>
+
+<main>
+
+  <!-- ===== 紹介文 ===== -->
+  <section>
+    <span class="section-label">PROFILE</span>
+    <div class="profile">
+      <div class="avatar" aria-hidden="true">A72</div>
+      <div class="profile-body">
+        <h2>Azalea72です</h2>
+        <p>学生時代はスパイカーとして試合に立っていました。今は観客席から、あの頃と同じ熱量でコートを見ています。</p>
+        <p>バレーボールの魅力は、一本のボールを6人でつなぐ短い時間の中に、駆け引きも我慢も一瞬の判断も全部詰まっているところだと思っています。その面白さを、もっといろんな人に知ってもらいたくてこのサイトを作りました。</p>
+        <p>観戦日記やギャラリーは無理のないペースで、でも途切れさせずに更新していく予定です。よければ他のページものぞいてみてください。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ウェブサイト ===== -->
+  <section>
+    <span class="section-label">WEBSITE</span>
+    <div class="link-grid">
+
+      <a class="link-card" href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">
+        <div class="link-icon">🏠</div>
+        <div class="link-text">
+          <span class="link-name">Azalea Creative Room</span>
+          <span class="link-desc">創作活動のメインサイト</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+        <div class="link-icon">🎨</div>
+        <div class="link-text">
+          <span class="link-name">Pixiv</span>
+          <span class="link-desc">イラスト・漫画を掲載中</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+        <div class="link-icon">✒️</div>
+        <div class="link-text">
+          <span class="link-name">カクヨム</span>
+          <span class="link-desc">小説を掲載中</span>
+        </div>
+      </a>
+
+      <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+        <div class="link-icon">🎬</div>
+        <div class="link-text">
+          <span class="link-name">YouTube（リリポピ）</span>
+          <span class="link-desc">動画チャンネル</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== メールフォーム ===== -->
+  <section>
+    <span class="section-label">CONTACT</span>
+    <p class="form-intro">感想やリクエストなど、お気軽にどうぞ。いただいたメッセージにはこちらから返信いたします。</p>
+
+    <div data-fs-success class="form-success" style="display:none;">
+      <span class="icon">✦</span>
+      メッセージを送信しました。ありがとうございます！
+    </div>
+
+    <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+    <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+
+      <div class="form-group">
+        <label for="name">お名前</label>
+        <input type="text" id="name" name="name" placeholder="お名前">
+      </div>
+
+      <div class="form-group">
+        <label for="email">メールアドレス <span class="required">*</span></label>
+        <input type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+        <span data-fs-error="email" class="field-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="message">メッセージ <span class="required">*</span></label>
+        <textarea id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+        <span data-fs-error="message" class="field-error"></span>
+      </div>
+
+      <button type="submit" data-fs-submit-btn>送信する</button>
+
+    </form>
+  </section>
+
+</main>
+
+<footer>
+  <p class="ai-notice">本サイトのコンテンツ（文章・画像を含む）は、AI学習データセットへの利用を目的とした収集・使用を禁じます。No part of this site may be used for AI training purposes.</p>
+  <p class="credit">© 2026 紅炎バレー部 / 灼熱レシーブ通信 — Azalea Creative Room</p>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navList = document.getElementById('navList');
+  menuBtn.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navList.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navList.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
