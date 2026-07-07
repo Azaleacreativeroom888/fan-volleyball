@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>ギャラリー | 紅炎バレー部</title>
+<meta name="description" content="紅炎バレー部のギャラリー。試合の記録やイラストをまとめています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red-primary:#e2001a;
+    --red-deep:#8c0014;
+    --red-bright:#ff4433;
+    --cream:#fff8f3;
+    --cream-dim:#fbeee6;
+    --charcoal:#241715;
+    --charcoal-soft:#4a3733;
+    --gold:#ffc700;
+    --line:rgba(36,23,21,0.1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--charcoal-soft);
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    line-height:1.85;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== Nav (共通) ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(255,248,243,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-family:'Rampart One', sans-serif; font-size:1.15rem; color:var(--red-primary); letter-spacing:0.02em;}
+  .logo span{color:var(--charcoal);}
+  nav ul{list-style:none;display:flex;gap:clamp(14px,3vw,34px);}
+  nav a{font-weight:700; font-size:0.92rem; position:relative; padding:4px 2px;}
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:3px;
+    background:var(--red-primary); transition:width .25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{width:100%;}
+  nav a.current{color:var(--red-primary);}
+  .menu-btn{display:none;}
+
+  @media (max-width:720px){
+    nav ul{
+      position:fixed; top:64px; right:-100%; height:calc(100vh - 64px);
+      width:min(280px,80vw); background:var(--cream);
+      flex-direction:column; padding:32px 28px; gap:26px;
+      transition:right .3s ease; box-shadow:-6px 0 24px rgba(0,0,0,0.08);
+    }
+    nav ul.open{right:0;}
+    .menu-btn{
+      display:flex; flex-direction:column; gap:5px; background:none;border:none;
+      cursor:pointer; padding:8px;
+    }
+    .menu-btn span{width:24px;height:3px;background:var(--red-primary);border-radius:2px;}
+  }
+
+  /* ===== Page head ===== */
+  .page-head{padding:150px 6vw 34px; text-align:center;}
+  .page-head .kicker{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.28em;
+    color:var(--red-primary); display:block; margin-bottom:12px;
+  }
+  .page-head h1{
+    font-family:'Rampart One', sans-serif;
+    font-size:clamp(1.8rem,4.5vw,2.8rem);
+    color:var(--charcoal);
+  }
+  .page-head p{max-width:520px;margin:16px auto 0;font-size:0.95rem;}
+
+  /* ===== Filter tabs ===== */
+  .filters{
+    display:flex; justify-content:center; flex-wrap:wrap; gap:10px;
+    padding:0 6vw 46px;
+  }
+  .filter-btn{
+    padding:9px 20px; border-radius:999px; border:1.5px solid var(--line);
+    background:var(--cream); font-size:0.85rem; font-weight:700;
+    cursor:pointer; transition:all .2s ease; color:var(--charcoal-soft);
+  }
+  .filter-btn:hover{border-color:var(--red-primary); color:var(--red-primary);}
+  .filter-btn.active{
+    background:var(--red-primary); border-color:var(--red-primary); color:#fff;
+  }
+
+  /* ===== Gallery grid ===== */
+  .gallery{
+    max-width:1140px; margin:0 auto; padding:0 6vw 110px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:22px;
+  }
+  .g-item{
+    display:none;
+    border-radius:14px; overflow:hidden;
+    background:var(--cream-dim);
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .g-item.show{display:block;}
+  .g-item:hover{transform:translateY(-5px); box-shadow:0 14px 26px rgba(140,0,20,0.14);}
+  .g-thumb{
+    aspect-ratio:4/3;
+    display:flex; align-items:center; justify-content:center;
+    font-size:2.2rem; color:rgba(255,255,255,0.9);
+  }
+  .g-item:nth-child(6n+1) .g-thumb{background:linear-gradient(135deg,var(--red-primary),var(--red-deep));}
+  .g-item:nth-child(6n+2) .g-thumb{background:linear-gradient(135deg,var(--gold),#d99900); color:var(--charcoal);}
+  .g-item:nth-child(6n+3) .g-thumb{background:linear-gradient(135deg,var(--charcoal),#3a2a26);}
+  .g-item:nth-child(6n+4) .g-thumb{background:linear-gradient(135deg,var(--red-bright),var(--red-primary));}
+  .g-item:nth-child(6n+5) .g-thumb{background:linear-gradient(135deg,#ffe1d6,var(--red-bright)); color:var(--charcoal);}
+  .g-item:nth-child(6n+6) .g-thumb{background:linear-gradient(135deg,#5c4440,var(--charcoal));}
+  .g-caption{padding:14px 16px 16px;}
+  .g-cat{
+    font-size:0.7rem; font-weight:700; letter-spacing:0.12em; color:var(--red-primary);
+    display:block; margin-bottom:4px;
+  }
+  .g-title{font-size:0.95rem; font-weight:700; color:var(--charcoal);}
+
+  .empty-note{
+    display:none; text-align:center; padding:40px 0; color:var(--charcoal-soft); font-size:0.95rem;
+  }
+
+  /* ===== Lightbox ===== */
+  .lightbox{
+    position:fixed; inset:0; background:rgba(36,23,21,0.82);
+    display:none; align-items:center; justify-content:center; z-index:200;
+    padding:6vw;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-inner{
+    background:var(--cream); border-radius:16px; max-width:520px; width:100%;
+    overflow:hidden;
+  }
+  .lightbox .g-thumb{aspect-ratio:16/10; font-size:3rem;}
+  .lightbox-caption{padding:22px 24px 26px;}
+  .lightbox-close{
+    position:absolute; top:22px; right:6vw; background:none; border:none;
+    color:#fff; font-size:1.6rem; cursor:pointer; line-height:1;
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    padding:38px 6vw 44px; text-align:center; font-size:0.78rem; color:var(--charcoal-soft);
+    border-top:1px solid var(--line);
+  }
+  footer .ai-notice{max-width:640px; margin:0 auto 10px; opacity:0.75; line-height:1.6;}
+  footer .credit{opacity:0.6;}
+
+  ::selection{background:var(--red-primary); color:#fff;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">紅炎<span>バレー部</span></div>
+  <button class="menu-btn" aria-label="メニューを開く" aria-expanded="false" id="menuBtn">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="blog.html">観戦日記</a></li>
+      <li><a href="gallery.html" class="current">ギャラリー</a></li>
+      <li><a href="about.html">about</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <div class="page-head">
+    <span class="kicker">GALLERY</span>
+    <h1>ギャラリー</h1>
+    <p>会場の空気や、印象に残った一瞬を残していく場所です。イラストと観戦記録、少しずつ増やしていきます。</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">すべて</button>
+    <button class="filter-btn" data-filter="illust">イラスト</button>
+    <button class="filter-btn" data-filter="photo">観戦記録</button>
+  </div>
+
+  <div class="gallery" id="galleryGrid">
+
+    <div class="g-item show" data-cat="illust">
+      <div class="g-thumb">🏐</div>
+      <div class="g-caption"><span class="g-cat">ILLUST</span><span class="g-title">スパイクの瞬間</span></div>
+    </div>
+
+    <div class="g-item show" data-cat="photo">
+      <div class="g-thumb">🔥</div>
+      <div class="g-caption"><span class="g-cat">記録</span><span class="g-title">大逆転セットの終盤</span></div>
+    </div>
+
+    <div class="g-item show" data-cat="illust">
+      <div class="g-thumb">✦</div>
+      <div class="g-caption"><span class="g-cat">ILLUST</span><span class="g-title">サーブ前の一呼吸</span></div>
+    </div>
+
+    <div class="g-item show" data-cat="photo">
+      <div class="g-thumb">▲</div>
+      <div class="g-caption"><span class="g-cat">記録</span><span class="g-title">満員の会場、開始直前</span></div>
+    </div>
+
+    <div class="g-item show" data-cat="illust">
+      <div class="g-thumb">●</div>
+      <div class="g-caption"><span class="g-cat">ILLUST</span><span class="g-title">レシーブの構え</span></div>
+    </div>
+
+    <div class="g-item show" data-cat="photo">
+      <div class="g-thumb">🏐</div>
+      <div class="g-caption"><span class="g-cat">記録</span><span class="g-title">タイムアウト明けのベンチ</span></div>
+    </div>
+
+  </div>
+
+  <p class="empty-note" id="emptyNote">まだこのカテゴリの投稿はありません。</p>
+
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="閉じる">×</button>
+  <div class="lightbox-inner">
+    <div class="g-thumb" id="lightboxThumb"></div>
+    <div class="lightbox-caption">
+      <span class="g-cat" id="lightboxCat"></span>
+      <span class="g-title" id="lightboxTitle" style="font-size:1.1rem;"></span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p class="ai-notice">本サイトのコンテンツ（文章・画像を含む）は、AI学習データセットへの利用を目的とした収集・使用を禁じます。No part of this site may be used for AI training purposes.</p>
+  <p class="credit">© 2026 紅炎バレー部 / 灼熱レシーブ通信 — Azalea Creative Room</p>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navList = document.getElementById('navList');
+  menuBtn.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navList.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navList.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.g-item');
+  const emptyNote = document.getElementById('emptyNote');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      let visibleCount = 0;
+      items.forEach(item => {
+        const match = filter === 'all' || item.dataset.cat === filter;
+        item.classList.toggle('show', match);
+        if(match) visibleCount++;
+      });
+      emptyNote.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxThumb = document.getElementById('lightboxThumb');
+  const lightboxCat = document.getElementById('lightboxCat');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxClose = document.getElementById('lightboxClose');
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const thumb = item.querySelector('.g-thumb');
+      lightboxThumb.textContent = thumb.textContent;
+      lightboxThumb.style.background = getComputedStyle(thumb).background;
+      lightboxThumb.style.color = getComputedStyle(thumb).color;
+      lightboxCat.textContent = item.querySelector('.g-cat').textContent;
+      lightboxTitle.textContent = item.querySelector('.g-title').textContent;
+      lightbox.classList.add('open');
+    });
+  });
+
+  const closeLightbox = () => lightbox.classList.remove('open');
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
