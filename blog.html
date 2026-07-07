@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>観戦日記 | 紅炎バレー部</title>
+<meta name="description" content="紅炎バレー部の観戦日記。試合を見て感じたことを日付と一言でまとめています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red-primary:#e2001a;
+    --red-deep:#8c0014;
+    --red-bright:#ff4433;
+    --cream:#fff8f3;
+    --cream-dim:#fbeee6;
+    --charcoal:#241715;
+    --charcoal-soft:#4a3733;
+    --line:rgba(36,23,21,0.1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--charcoal-soft);
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    line-height:1.85;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  /* ===== Nav (共通) ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(255,248,243,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Rampart One', sans-serif;
+    font-size:1.15rem;
+    color:var(--red-primary);
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--charcoal);}
+  nav ul{list-style:none;display:flex;gap:clamp(14px,3vw,34px);}
+  nav a{font-weight:700; font-size:0.92rem; position:relative; padding:4px 2px;}
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:3px;
+    background:var(--red-primary); transition:width .25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{width:100%;}
+  nav a.current{color:var(--red-primary);}
+  .menu-btn{display:none;}
+
+  @media (max-width:720px){
+    nav ul{
+      position:fixed; top:64px; right:-100%; height:calc(100vh - 64px);
+      width:min(280px,80vw); background:var(--cream);
+      flex-direction:column; padding:32px 28px; gap:26px;
+      transition:right .3s ease; box-shadow:-6px 0 24px rgba(0,0,0,0.08);
+    }
+    nav ul.open{right:0;}
+    .menu-btn{
+      display:flex; flex-direction:column; gap:5px; background:none;border:none;
+      cursor:pointer; padding:8px;
+    }
+    .menu-btn span{width:24px;height:3px;background:var(--red-primary);border-radius:2px;}
+  }
+
+  /* ===== Page head ===== */
+  .page-head{
+    padding:150px 6vw 50px;
+    text-align:center;
+  }
+  .page-head .kicker{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.28em;
+    color:var(--red-primary); display:block; margin-bottom:12px;
+  }
+  .page-head h1{
+    font-family:'Rampart One', sans-serif;
+    font-size:clamp(1.8rem,4.5vw,2.8rem);
+    color:var(--charcoal);
+  }
+
+  /* ===== Diary list (日付＋内容のみ) ===== */
+  .diary{
+    max-width:760px; margin:0 auto; padding:0 6vw 120px;
+  }
+  .entry{
+    display:grid; grid-template-columns:110px 1fr; gap:24px;
+    padding:26px 0; border-bottom:1px solid var(--line);
+  }
+  .entry:first-child{padding-top:0;}
+  .entry-date{
+    font-family:'Teko',sans-serif; font-weight:700; color:var(--red-primary);
+    font-size:1.5rem; line-height:1.1; white-space:nowrap;
+  }
+  .entry-text{font-size:0.98rem;}
+
+  @media (max-width:560px){
+    .entry{grid-template-columns:1fr; gap:6px;}
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    padding:38px 6vw 44px; text-align:center; font-size:0.78rem; color:var(--charcoal-soft);
+    border-top:1px solid var(--line);
+  }
+  footer .ai-notice{max-width:640px; margin:0 auto 10px; opacity:0.75; line-height:1.6;}
+  footer .credit{opacity:0.6;}
+
+  ::selection{background:var(--red-primary); color:#fff;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">紅炎<span>バレー部</span></div>
+  <button class="menu-btn" aria-label="メニューを開く" aria-expanded="false" id="menuBtn">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="blog.html" class="current">観戦日記</a></li>
+      <li><a href="gallery.html">ギャラリー</a></li>
+      <li><a href="about.html">about</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <div class="page-head">
+    <span class="kicker">DIARY</span>
+    <h1>観戦日記</h1>
+  </div>
+
+  <div class="diary">
+
+    <div class="entry">
+      <div class="entry-date">07.05</div>
+      <div class="entry-text">終盤のタイムアウト明け、たった一本のサーブでリズムが変わる瞬間を見た。ああいう流れの変え方があるのかと、ずっと鳥肌が立っていた。</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">06.28</div>
+      <div class="entry-text">リベロの読みが冴えていた試合。レシーブ位置の一歩が全部正解だった。守備だけでこんなに会場が沸くんだと改めて実感。</div>
+    </div>
+
+    <div class="entry">
+      <div class="entry-date">06.20</div>
+      <div class="entry-text">セッターのトスワークをずっと目で追っていた一日。配球って本当に面白い。同じフォームから何種類も選択肢があるのがすごい。</div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  <p class="ai-notice">本サイトのコンテンツ（文章・画像を含む）は、AI学習データセットへの利用を目的とした収集・使用を禁じます。No part of this site may be used for AI training purposes.</p>
+  <p class="credit">© 2026 紅炎バレー部 / 灼熱レシーブ通信 — Azalea Creative Room</p>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navList = document.getElementById('navList');
+  menuBtn.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navList.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navList.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
