@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noai, noimageai">
+<title>紅炎バレー部 | 灼熱レシーブ通信</title>
+<meta name="description" content="バレーボールの魅力を全力で発信するファンサイト「紅炎バレー部」。ルール解説、用語辞典、観戦日記、ギャラリーをお届けします。">
+<meta property="og:title" content="紅炎バレー部 | 灼熱レシーブ通信">
+<meta property="og:description" content="バレーボールの魅力を全力で発信するファンサイト。ラリーの熱狂をそのままお届けします。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Teko:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red-primary:#e2001a;
+    --red-deep:#8c0014;
+    --red-bright:#ff4433;
+    --cream:#fff8f3;
+    --cream-dim:#fbeee6;
+    --charcoal:#241715;
+    --charcoal-soft:#4a3733;
+    --gold:#ffc700;
+    --line:rgba(36,23,21,0.1);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--charcoal-soft);
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    line-height:1.85;
+    overflow-x:hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  .display{
+    font-family:'Rampart One', 'Zen Kaku Gothic New', sans-serif;
+  }
+
+  .score-num{
+    font-family:'Teko', sans-serif;
+    font-weight:700;
+  }
+
+  /* ===== Nav ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 6vw;
+    background:rgba(255,248,243,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{
+    font-family:'Rampart One', sans-serif;
+    font-size:1.15rem;
+    color:var(--red-primary);
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--charcoal);}
+  nav ul{list-style:none;display:flex;gap:clamp(14px,3vw,34px);}
+  nav a{
+    font-weight:700; font-size:0.92rem;
+    position:relative;
+    padding:4px 2px;
+  }
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:3px;
+    background:var(--red-primary); transition:width .25s ease;
+  }
+  nav a:hover::after, nav a:focus-visible::after{width:100%;}
+  nav a.current{color:var(--red-primary);}
+  .menu-btn{display:none;}
+
+  @media (max-width:720px){
+    nav ul{
+      position:fixed; top:64px; right:-100%; height:calc(100vh - 64px);
+      width:min(280px,80vw); background:var(--cream);
+      flex-direction:column; padding:32px 28px; gap:26px;
+      transition:right .3s ease; box-shadow:-6px 0 24px rgba(0,0,0,0.08);
+    }
+    nav ul.open{right:0;}
+    .menu-btn{
+      display:flex; flex-direction:column; gap:5px; background:none;border:none;
+      cursor:pointer; padding:8px;
+    }
+    .menu-btn span{width:24px;height:3px;background:var(--red-primary);border-radius:2px;}
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:120px 6vw 100px;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(226,0,26,0.12), transparent 55%),
+      radial-gradient(circle at 85% 80%, rgba(255,199,0,0.10), transparent 50%);
+  }
+
+  .court-lines{
+    position:absolute; inset:0; z-index:0; opacity:0.5;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    mask-image:linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  }
+
+  .eyebrow{
+    font-size:0.8rem; font-weight:700; letter-spacing:0.3em;
+    color:var(--red-primary); margin-bottom:18px; z-index:2;
+  }
+
+  .hero h1{
+    font-size:clamp(2.6rem, 9vw, 6.2rem);
+    line-height:1.05;
+    color:var(--red-primary);
+    text-shadow:4px 4px 0 var(--red-deep);
+    z-index:2;
+    letter-spacing:0.01em;
+  }
+  .hero h1 .accent{
+    display:block;
+    font-size:0.42em;
+    color:var(--charcoal);
+    text-shadow:none;
+    margin-top:14px;
+    letter-spacing:0.06em;
+  }
+
+  .hero p.lead{
+    max-width:560px; margin:28px auto 0; z-index:2;
+    font-size:clamp(0.98rem,1.6vw,1.15rem);
+    font-weight:500;
+  }
+
+  /* rally court + ball animation */
+  .rally{
+    position:relative; width:min(720px,88vw); height:120px;
+    margin-top:56px; z-index:2;
+  }
+  .net{
+    position:absolute; left:50%; top:10px; bottom:14px; width:3px;
+    background:repeating-linear-gradient(180deg, var(--charcoal) 0 6px, transparent 6px 12px);
+    transform:translateX(-50%);
+  }
+  .net::before{
+    content:""; position:absolute; top:-8px; left:-9px; right:-9px; height:6px;
+    background:var(--red-primary); border-radius:2px;
+  }
+  .ground-line{
+    position:absolute; left:0; right:0; bottom:12px; height:2px; background:var(--line);
+  }
+  .ball{
+    position:absolute; width:26px; height:26px; border-radius:50%;
+    left:6%;
+    background:
+      conic-gradient(from 45deg, var(--red-bright) 0 90deg, var(--cream) 0 180deg, var(--red-bright) 0 270deg, var(--cream) 0 360deg);
+    box-shadow:0 6px 10px rgba(36,23,21,0.25);
+    border:1.5px solid var(--charcoal);
+    animation:rally-arc 3.2s cubic-bezier(.45,0,.55,1) infinite;
+  }
+  @keyframes rally-arc{
+    0%   {left:4%;  top:74px;  transform:scale(0.9) rotate(0deg);}
+    22%  {left:26%; top:6px;   transform:scale(1) rotate(90deg);}
+    45%  {left:48%; top:60px;  transform:scale(0.94) rotate(180deg);}
+    50%  {left:48%; top:60px;}
+    72%  {left:70%; top:0px;   transform:scale(1) rotate(270deg);}
+    95%  {left:94%; top:74px;  transform:scale(0.9) rotate(360deg);}
+    100% {left:94%; top:74px;}
+  }
+
+  .scroll-cue{
+    margin-top:44px; font-size:0.8rem; font-weight:700; letter-spacing:0.15em;
+    color:var(--charcoal-soft); z-index:2; opacity:0.7;
+  }
+
+  /* ===== Section shells ===== */
+  section{padding:90px 6vw;}
+  .section-head{
+    max-width:680px; margin:0 auto 52px; text-align:center;
+  }
+  .section-head .kicker{
+    font-size:0.78rem; font-weight:700; letter-spacing:0.28em;
+    color:var(--red-primary); display:block; margin-bottom:12px;
+  }
+  .section-head h2{
+    font-family:'Rampart One', sans-serif;
+    font-size:clamp(1.6rem,3.6vw,2.4rem);
+    color:var(--charcoal);
+  }
+  .section-head p{margin-top:14px; font-size:0.98rem;}
+
+  /* ===== Rotation cards (positions 1-6) ===== */
+  .rotation{
+    background:var(--cream-dim);
+  }
+  .rotation-grid{
+    max-width:1120px; margin:0 auto;
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:26px;
+  }
+  .r-card{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:30px 26px;
+    position:relative;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .r-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 16px 30px rgba(140,0,20,0.12);
+  }
+  .r-card .pos{
+    position:absolute; top:-16px; left:24px;
+    width:40px; height:40px; border-radius:50%;
+    background:var(--red-primary); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Teko',sans-serif; font-size:1.4rem; font-weight:700;
+    box-shadow:0 4px 10px rgba(226,0,26,0.35);
+  }
+  .r-card .role{
+    font-size:0.72rem; font-weight:700; letter-spacing:0.16em;
+    color:var(--red-deep); margin:14px 0 6px;
+  }
+  .r-card h3{
+    font-size:1.15rem; color:var(--charcoal); margin-bottom:10px;
+  }
+  .r-card p{font-size:0.92rem;}
+  .r-card .go{
+    display:inline-block; margin-top:14px; font-size:0.85rem; font-weight:700; color:var(--red-primary);
+  }
+  .r-card .go::after{content:" →"; transition:margin .2s ease;}
+  .r-card:hover .go::after{margin-left:4px;}
+
+  /* ===== Score strip ===== */
+  .score-strip{
+    background:var(--charcoal);
+    color:var(--cream);
+    padding:52px 6vw;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(28px,6vw,90px);
+    text-align:center;
+  }
+  .score-strip .stat b{
+    display:block; font-family:'Teko',sans-serif; font-size:clamp(2.4rem,5vw,3.4rem);
+    color:var(--red-bright); line-height:1;
+  }
+  .score-strip .stat span{font-size:0.78rem; letter-spacing:0.1em; opacity:0.75;}
+
+  /* ===== Blog / gallery teaser ===== */
+  .teaser-wrap{
+    max-width:1120px; margin:0 auto;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:48px;
+  }
+  @media (max-width:860px){.teaser-wrap{grid-template-columns:1fr;}}
+
+  .diary-list{list-style:none;}
+  .diary-list li{
+    display:flex; gap:18px; padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .diary-list li:first-child{padding-top:0;}
+  .diary-date{
+    font-family:'Teko',sans-serif; font-size:1.3rem; color:var(--red-primary);
+    white-space:nowrap; min-width:88px;
+  }
+  .diary-text{font-size:0.95rem;}
+  .teaser-cta{
+    display:inline-block; margin-top:22px; font-weight:700; color:var(--red-primary); font-size:0.9rem;
+  }
+
+  .gallery-peek{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+  }
+  .g-tile{
+    aspect-ratio:1; border-radius:10px;
+    background:linear-gradient(135deg, var(--red-primary), var(--red-deep));
+    display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.85); font-size:1.6rem;
+    position:relative; overflow:hidden;
+  }
+  .g-tile:nth-child(2){background:linear-gradient(135deg, var(--gold), #d99900); color:var(--charcoal);}
+  .g-tile:nth-child(4){background:linear-gradient(135deg, var(--charcoal), #3a2a26);}
+  .g-tile:nth-child(6){background:linear-gradient(135deg, var(--red-bright), var(--red-primary));}
+
+  /* ===== About teaser ===== */
+  .about-teaser{
+    background:var(--cream-dim);
+  }
+  .about-box{
+    max-width:760px; margin:0 auto; text-align:center;
+  }
+  .about-box .avatar{
+    width:96px;height:96px;border-radius:50%;margin:0 auto 20px;
+    background:conic-gradient(from 200deg, var(--red-primary), var(--gold), var(--red-deep));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Rampart One',sans-serif;color:#fff;font-size:1.6rem;
+    box-shadow:0 10px 22px rgba(140,0,20,0.25);
+  }
+
+  /* ===== Glossary teaser ===== */
+  .glossary-grid{
+    max-width:900px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;
+  }
+  .term{
+    background:var(--cream); border:1px solid var(--line); border-radius:12px; padding:20px;
+  }
+  .term dt{font-weight:900; color:var(--red-primary); margin-bottom:6px;}
+  .term dd{font-size:0.9rem;}
+
+  /* ===== Footer ===== */
+  footer{
+    padding:38px 6vw 44px; text-align:center; font-size:0.78rem; color:var(--charcoal-soft);
+    border-top:1px solid var(--line);
+  }
+  footer .ai-notice{max-width:640px; margin:0 auto 10px; opacity:0.75; line-height:1.6;}
+  footer .credit{opacity:0.6;}
+
+  ::selection{background:var(--red-primary); color:#fff;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">紅炎<span>バレー部</span></div>
+  <button class="menu-btn" aria-label="メニューを開く" aria-expanded="false" id="menuBtn">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html" class="current">ホーム</a></li>
+      <li><a href="blog.html">観戦日記</a></li>
+      <li><a href="gallery.html">ギャラリー</a></li>
+      <li><a href="about.html">about</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="court-lines" aria-hidden="true"></div>
+    <p class="eyebrow">VOLLEYBALL FAN SITE</p>
+    <h1 class="display">紅炎バレー部
+      <span class="accent">灼熱レシーブ通信</span>
+    </h1>
+    <p class="lead">一本のレシーブから始まるラリーの熱を、そのままここに。ルールも、用語も、観戦の記録も、全部まとめて発信していきます。</p>
+
+    <div class="rally" aria-hidden="true">
+      <div class="ground-line"></div>
+      <div class="net"></div>
+      <div class="ball"></div>
+    </div>
+
+    <p class="scroll-cue">SCROLL ▾</p>
+  </section>
+
+  <!-- ===== ROTATION / CONTENT MAP ===== -->
+  <section class="rotation">
+    <div class="section-head">
+      <span class="kicker">ROTATION 1–6</span>
+      <h2>ポジションごとに、サイトを回す</h2>
+      <p>バレーボールは6人がローテーションしながら役割を変えていくスポーツ。このサイトも同じように、6つの持ち場でお迎えします。</p>
+    </div>
+    <div class="rotation-grid">
+
+      <div class="r-card">
+        <div class="pos">1</div>
+        <p class="role">サーブ担当</p>
+        <h3>はじめまして、紅炎バレー部です</h3>
+        <p>ラリーの最初の一球はいつもここから。サイトの目的と、更新の予定をまずはご挨拶がわりに。</p>
+      </div>
+
+      <div class="r-card">
+        <div class="pos">2</div>
+        <p class="role">ライト・攻撃開始</p>
+        <h3>観戦日記、更新中</h3>
+        <p>試合を見て感じたこと、気になったプレーをその日のうちに書き留めています。日付と一言メモだけのシンプル日記です。</p>
+        <a href="blog.html" class="go">日記を読む</a>
+      </div>
+
+      <div class="r-card">
+        <div class="pos">3</div>
+        <p class="role">ミドル・司令塔</p>
+        <h3>用語辞典、はじめました</h3>
+        <p>「クイック」「バンチシフト」など、初めて聞くと戸惑う言葉を少しずつ解説していきます。下にも一部を掲載中。</p>
+      </div>
+
+      <div class="r-card">
+        <div class="pos">4</div>
+        <p class="role">レフト・エース</p>
+        <h3>ギャラリー、準備中</h3>
+        <p>会場の空気や、忘れられない一瞬を切り取ったイラストや写真をこれから並べていく予定です。</p>
+        <a href="gallery.html" class="go">見にいく</a>
+      </div>
+
+      <div class="r-card">
+        <div class="pos">5</div>
+        <p class="role">レフトバック・守備</p>
+        <h3>運営者プロフィール</h3>
+        <p>このサイトを一人で作っている中の人について。バレーボールを好きになったきっかけも書いています。</p>
+        <a href="about.html" class="go">プロフィールへ</a>
+      </div>
+
+      <div class="r-card">
+        <div class="pos">6</div>
+        <p class="role">リベロ・最終防衛</p>
+        <h3>更新は少しずつ、着実に</h3>
+        <p>無理のないペースで、でも途切れさせずに。守備の要のように、地道な更新を続けていきます。</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== STATS STRIP ===== -->
+  <section class="score-strip" aria-label="バレーボール豆知識">
+    <div class="stat"><b class="score-num">6</b><span>コート上の人数</span></div>
+    <div class="stat"><b class="score-num">25</b><span>1セットの目標得点</span></div>
+    <div class="stat"><b class="score-num">3</b><span>味方に許される最大タッチ数</span></div>
+    <div class="stat"><b class="score-num">15</b><span>最終セットの目標得点</span></div>
+  </section>
+
+  <!-- ===== BLOG + GALLERY TEASER ===== -->
+  <section>
+    <div class="section-head">
+      <span class="kicker">LATEST</span>
+      <h2>最近の記録</h2>
+    </div>
+    <div class="teaser-wrap">
+      <div>
+        <ul class="diary-list">
+          <li><span class="diary-date">07.05</span><span class="diary-text">終盤のタイムアウト明け、たった一本のサーブでリズムが変わる瞬間を見た。</span></li>
+          <li><span class="diary-date">06.28</span><span class="diary-text">リベロの読みが冴えていた試合。レシーブ位置の一歩が全部正解だった。</span></li>
+          <li><span class="diary-date">06.20</span><span class="diary-text">セッターのトスワークをずっと目で追っていた一日。配球って本当に面白い。</span></li>
+        </ul>
+        <a href="blog.html" class="teaser-cta">観戦日記をもっと見る →</a>
+      </div>
+      <div>
+        <div class="gallery-peek" aria-hidden="true">
+          <div class="g-tile">🏐</div>
+          <div class="g-tile">🔥</div>
+          <div class="g-tile">✦</div>
+          <div class="g-tile">▲</div>
+          <div class="g-tile">●</div>
+          <div class="g-tile">🏐</div>
+        </div>
+        <a href="gallery.html" class="teaser-cta">ギャラリーを見る →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GLOSSARY TEASER ===== -->
+  <section class="rotation">
+    <div class="section-head">
+      <span class="kicker">MINI GLOSSARY</span>
+      <h2>今日の一語</h2>
+      <p>観戦がもっと楽しくなる、バレーボール用語のミニ解説です。</p>
+    </div>
+    <dl class="glossary-grid">
+      <div class="term">
+        <dt>クイック</dt>
+        <dd>セッターが上げた低く速いトスを、素早いタイミングで打ち込む攻撃。読まれる前に決める駆け引きが魅力。</dd>
+      </div>
+      <div class="term">
+        <dt>バンチシフト</dt>
+        <dd>サーブレシーブの際、選手たちが中央に寄って構える隊形。守備範囲の分担がひと目でわかる。</dd>
+      </div>
+      <div class="term">
+        <dt>ワンタッチ</dt>
+        <dd>ブロックの手にわずかに触れること。触れた瞬間からまた3回の攻撃権が生まれる、地味だけど重要なプレー。</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- ===== ABOUT TEASER ===== -->
+  <section class="about-teaser">
+    <div class="about-box">
+      <div class="avatar" aria-hidden="true">A72</div>
+      <span class="kicker">RUNNING THIS SITE</span>
+      <h2 class="display" style="font-size:1.4rem;color:var(--charcoal);margin-top:10px;">Azalea72です</h2>
+      <p style="margin-top:14px;">学生時代はスパイカーとして試合に立っていました。今は観客席から、あの頃と同じ熱量でコートを見ています。バレーボールの面白さを、もっといろんな人に知ってほしくてこのサイトを作りました。</p>
+      <a href="about.html" class="teaser-cta">プロフィールを詳しく見る →</a>
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <p class="ai-notice">本サイトのコンテンツ（文章・画像を含む）は、AI学習データセットへの利用を目的とした収集・使用を禁じます。No part of this site may be used for AI training purposes.</p>
+  <p class="credit">© 2026 紅炎バレー部 / 灼熱レシーブ通信 — Azalea Creative Room</p>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navList = document.getElementById('navList');
+  menuBtn.addEventListener('click', () => {
+    const open = navList.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  navList.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navList.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
